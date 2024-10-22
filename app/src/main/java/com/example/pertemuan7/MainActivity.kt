@@ -9,24 +9,26 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.viewpager2.widget.ViewPager2
+import com.example.pertemuan7.databinding.ActivityMainBinding
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding:ActivityMainBinding
     companion object {
-        private val TAB_TITLES = intArrayOf(R.string.tab_text1, R.string.tab_text2, R.string.tab_text3)
+        private val TAB_TITLES = intArrayOf(R.string.tab_text1, R.string.tab_text2)
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         val sectionsPagerAdapter = SecondPagerAdapter(this)
         val viewPager : ViewPager2 = findViewById(R.id.view_pager)
         viewPager.adapter = sectionsPagerAdapter
-
         val tabs : TabLayout = findViewById(R.id.tab_layout)
         TabLayoutMediator(tabs, viewPager){
-            tab, position -> tab.text = resources.getString(TAB_TITLES[position])
+                tab, position -> tab.text = resources.getString(TAB_TITLES[position])
         }.attach()
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -35,21 +37,5 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_option, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.action_log_out -> {
-                Toast.makeText(this, "Home", Toast.LENGTH_SHORT).show()
-                true
-                //Intent ke login
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
     }
 }

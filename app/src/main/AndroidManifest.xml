@@ -13,9 +13,15 @@
         android:theme="@style/Theme.Pertemuan7"
         tools:targetApi="31">
         <activity
+            android:name=".ProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DashboardActivity"
+            android:exported="false"
+            android:theme="@style/Base.Theme.WithActionBar"/>
+        <activity
             android:name=".MainActivity"
-            android:exported="true"
-            android:theme="@style/Base.Theme.WithActionBar">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
